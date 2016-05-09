@@ -7,5 +7,14 @@
     ""
   ],
   "author": "Greg Walker <michael.walker@gsa.gov>",
-  "license": "CC0-1.0"
+  "license": "CC0-1.0",
+  "scripts": {
+    "cf-ups": "node -e 'console.log(\"'\"'\"'\" + JSON.stringify(require(\"./.cf-ups.json\")) + \"'\"'\"'\")'"
+  },
+  "dependencies": {
+    "@18f/trello-webhook-server": "^3.1.0",
+    "@erdc-itl/simple-logger": "^1.1.0",
+    "cfenv": "^1.0.3",
+    "dotenv": "^2.0.0"
+  }
 }
