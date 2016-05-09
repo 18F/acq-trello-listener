@@ -1,0 +1,11 @@
+{
+  "name": "acq-trello-listener",
+  "version": "1.0.0",
+  "description": "AcqStack Trello listener server",
+  "main": "main.js",
+  "keywords": [
+    ""
+  ],
+  "author": "Greg Walker <michael.walker@gsa.gov>",
+  "license": "CC0-1.0"
+}
