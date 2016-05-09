@@ -17,7 +17,7 @@ const knownEnvs = [
 if (appEnv.getServices() && Object.keys(appEnv.getServices()).length) {
   // If running on Cloud Foundry
   for (const env of knownEnvs) {
-    process.env[env] = appEnv.getServiceCreds('atc-trello-cups')[env];
+    process.env[env] = appEnv.getServiceCreds('acq-trello-cups')[env];
   }
   process.env.HOST = appEnv.url;
 
