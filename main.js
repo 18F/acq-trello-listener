@@ -18,7 +18,6 @@ httpServer.listen(process.env.PORT, () => {
   intakeListener.start(process.env.TRELLO_INTAKE_BOARD_ID)
     .then(webhookID => {
       log.info(`Intake webhook ID: ${webhookID}`);
-      intakeListener.on('data', e => log.warn(`Got an inake webhook event`));
       intakeListener.on('data', webhookHandlers.intake);
     })
     .catch(e => {
