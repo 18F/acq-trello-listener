@@ -54,7 +54,11 @@ module.exports = function handleIntakeWebhookEvent(e) {
               reject(e);
             });
         });
+      } else {
+        reject('Not an Agile  BPA card, or not a move into IAA Go');
       }
+    } else {
+      reject('Not a card move');
     }
   });
 };
