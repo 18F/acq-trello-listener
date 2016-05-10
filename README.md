@@ -1,6 +1,6 @@
 # acq-trello-listener
 
-[![Build Status](https://travis-ci.org/18F/acq-trello-listener.svg?branch=develop)](https://travis-ci.org/18F/acq-trello-listener) [![Code Climate](https://codeclimate.com/github/18F/acq-trello-listener/badges/gpa.svg)](https://codeclimate.com/github/18F/acq-trello-listener) [![Test Coverage](https://codecov.io/gh/18F/acq-trello-listener/branch/master/graph/badge.svg)](https://codecov.io/gh/18F/acq-trello-listener) [![Dependency Status](https://david-dm.org/18F/acq-trello-listener.svg)](https://david-dm.org/18F/acq-trello-listener)
+[![Build Status](https://travis-ci.org/18F/acq-trello-listener.svg?branch=develop)](https://travis-ci.org/18F/acq-trello-listener) [![Code Climate](https://codeclimate.com/github/18F/acq-trello-listener/badges/gpa.svg)](https://codeclimate.com/github/18F/acq-trello-listener) [![Test Coverage](https://codecov.io/gh/18F/acq-trello-listener/branch/develop/graph/badge.svg)](https://codecov.io/gh/18F/acq-trello-listener) [![Dependency Status](https://david-dm.org/18F/acq-trello-listener.svg)](https://david-dm.org/18F/acq-trello-listener)
 
 AcqStack Trello listener server.  Listens to Trello webhook events on the AcqStack intake, BPA, and ATC boards.
 
