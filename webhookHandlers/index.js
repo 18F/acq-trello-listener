@@ -1,5 +1,7 @@
 'use strict';
 
+const intake = require('./intake');
+
 module.exports = {
-  intake: require('./intake')
+  intake
 };
