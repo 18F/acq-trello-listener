@@ -3,6 +3,9 @@
 const tap = require('tap');
 const getEventType = require('../../webhookHandlers/event-types');
 
+// Disable logging to the console.
+require('@erdc-itl/simple-logger').setOptions({ console: false });
+
 tap.test('webhook handlers - event types', t1 => {
   t1.test('With no data', t2 => {
     const eventType = getEventType();
