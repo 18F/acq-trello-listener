@@ -13,7 +13,7 @@
     "cf-ups-dev": "node -e 'console.log(\"'\"'\"'\" + JSON.stringify(require(\"./.cf-ups.json\").dev) + \"'\"'\"'\")'",
     "cf-ups-prod": "node -e 'console.log(\"'\"'\"'\" + JSON.stringify(require(\"./.cf-ups.json\").prod) + \"'\"'\"'\")'",
     "lint": "eslint --fix **/*.js",
-    "test": "tap -Rspec --cov tests/coverage.js tests/**/**.js"
+    "test": "tap -Rspec --cov test/coverage.js test/**/**.js"
   },
   "dependencies": {
     "@18f/trello-webhook-server": "^3.1.0",
