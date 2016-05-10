@@ -19,6 +19,7 @@
     "@erdc-itl/simple-logger": "^1.1.0",
     "cfenv": "^1.0.3",
     "dotenv": "^2.0.0",
+    "moment": "^2.13.0",
     "node-trello": "^1.1.2"
   },
   "engines": {

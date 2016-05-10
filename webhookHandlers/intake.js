@@ -14,37 +14,43 @@ module.exports = function handleIntakeWebhookEvent(e) {
         // an associated BPA card and board.  So, we need
         // to check the description.
         trello.get(`/1/cards/${e.action.data.card.id}`, (err, card) => {
-          if(err) {
+          if (err) {
             return reject(err);
           }
 
-          if(card.desc.match(/(^|\n)\*\*Agile BPA Links\*\*\n/)) {
+          if (card.desc.match(/(^|\n)\*\*Agile BPA Links\*\*\n\n/)) {
             return reject('Intake already has links to BPA dashboard and BPA project management board');
           }
 
+          let boardURL;
+          const bits = card.name.match(/Agile BPA\s?(\/|-)([^\/-]*)(\/|-)(.*)/);
+          const agency = bits[2].trim();
+          const project = bits[4].trim();
+
           // Now create a board.
           actions.createBPAOrderBoard(card.name)
-            .then(boardURL => {
+            .then(url => {
+              boardURL = url;
+              // And then create a BPA dashboard card.
+              return actions.createBPAOrderCard(project, agency, '', boardURL);
+            })
+            .then(bpaCard => {
               let newDesc = card.desc;
-              if(newDesc) {
+              if (newDesc) {
                 newDesc += '\n\n';
               }
-              newDesc += `**Agile BPA Links**\nManagement Board: ${boardURL}`;
+              newDesc += `**Agile BPA Links**\n\n* Management Board: ${boardURL}\n* BPA Dashboard: ${bpaCard.url}`;
 
-              return new Promise((updateResolve, updateReject) => {
-                trello.put(`/1/cards/${card.id}/desc`, { value: newDesc }, (descErr, ddd) => {
-                  if(descErr) {
-                    return updateReject(descErr);
-                  }
-                  console.log(ddd);
-                  return updateResolve();
-                });
+              trello.put(`/1/cards/${card.id}/desc`, { value: newDesc }, descErr => {
+                if (descErr) {
+                  return reject(descErr);
+                }
+                return resolve(boardURL);
               });
             })
-            .then(() => {
-              resolve();
-            })
             .catch(e => {
+              log.error('Error processing intake card move');
+              log.error(e);
               reject(e);
             });
         });
