@@ -6,8 +6,7 @@ module.exports = function createBoard(name) {
   const meta = {
     name,
     defaultLists: false,
-    prefs_permissionLevel: 'private',
-    idBoardSource: '5730ea380f2950dd31043f55'
+    prefs_permissionLevel: 'private'
   };
 
   return new Promise((resolve, reject) => {
