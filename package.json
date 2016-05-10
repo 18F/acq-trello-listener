@@ -12,7 +12,8 @@
     "start": "node main.js",
     "cf-ups-dev": "node -e 'console.log(\"'\"'\"'\" + JSON.stringify(require(\"./.cf-ups.json\").dev) + \"'\"'\"'\")'",
     "cf-ups-prod": "node -e 'console.log(\"'\"'\"'\" + JSON.stringify(require(\"./.cf-ups.json\").prod) + \"'\"'\"'\")'",
-    "lint": "eslint --fix **/*.js"
+    "lint": "eslint --fix **/*.js",
+    "test": "tap -Rspec --cov tests/coverage.js tests/**/**.js"
   },
   "dependencies": {
     "@18f/trello-webhook-server": "^3.1.0",
@@ -31,6 +32,9 @@
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^1.2.0",
-    "eslint-plugin-react": "^5.0.1"
+    "eslint-plugin-react": "^5.0.1",
+    "sinon": "^1.17.4",
+    "sinon-as-promised": "^4.0.0",
+    "tap": "^5.7.1"
   }
 }

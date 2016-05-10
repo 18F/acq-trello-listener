@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 .env
 .cf-ups.json
+.nyc_output
+coverage
