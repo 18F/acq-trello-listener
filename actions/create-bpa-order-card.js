@@ -12,13 +12,12 @@ module.exports = function createBPAOrderCard(cardName, agency, subagency, manage
         idList: process.env.TRELLO_BPA_IAA_LIST_ID
       }, (err, card) => {
         if (err) {
-          reject(err);
-        } else {
-          resolve(card);
+          return reject(err);
         }
+        return resolve(card);
       });
     } else {
-      return reject('BPA IAA list ID not ready');
+      reject('BPA IAA list ID not ready');
     }
   });
 };

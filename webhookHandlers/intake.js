@@ -28,7 +28,7 @@ module.exports = function handleIntakeWebhookEvent(e) {
           const project = bits[4].trim();
 
           // Now create a board.
-          actions.createBPAOrderBoard(card.name)
+          return actions.createBPAOrderBoard(card.name)
             .then(url => {
               boardURL = url;
               // And then create a BPA dashboard card.
@@ -48,10 +48,10 @@ module.exports = function handleIntakeWebhookEvent(e) {
                 return resolve(boardURL);
               });
             })
-            .catch(e => {
+            .catch(rejection => {
               log.error('Error processing intake card move');
-              log.error(e);
-              reject(e);
+              log.error(rejection);
+              reject(rejection);
             });
         });
       } else {
