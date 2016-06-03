@@ -58,6 +58,12 @@ tap.test('webhook handlers - event types', t1 => {
       t3.done();
     });
 
+    t2.test('With addLabelToCard type', t3 => {
+      const eventType = getEventType({ action: { type: 'addLabelToCard' }});
+      t3.equal(eventType, getEventType.LabelAdded, 'event type should be LABEL_ADDED_TYPE');
+      t3.done();
+    })
+
     t2.done();
   });
 

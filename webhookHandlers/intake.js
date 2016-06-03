@@ -1,9 +1,9 @@
 'use strict';
 
 const iaaGo = require('./intake/move-to-iaa-go')
-const resourcing = require('./intake/add-resourcing-label');
+const preflight = require('./intake/move-to-iaa-completed');
 
 module.exports = function executeIntakeHandlers(e) {
   return iaaGo(e)
-    .catch(() => resourcing(e))  // only do resourcing if IAA Go rejects
+    //.catch(() => preflight(e))  // only do resourcing if IAA Go rejects
 }

@@ -9,12 +9,5 @@ module.exports = function createBoard(name) {
     prefs_permissionLevel: 'private'
   };
 
-  return new Promise((resolve, reject) => {
-    trello.post('/1/boards', meta, (err, data) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(data.url);
-    });
-  });
+  return trello.post('/1/boards', meta);
 };
