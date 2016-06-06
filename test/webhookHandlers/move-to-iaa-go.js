@@ -9,8 +9,11 @@ process.env.TRELLO_API_KEY = 'trello-api-key';
 process.env.TRELLO_API_TOK = 'trello-api-tok';
 
 const sandbox = sinon.sandbox.create();
+const addIntakeChecklist = sandbox.stub().resolves();
 const createATCCard = sandbox.stub();
 const createBPAComponents = sandbox.stub();
+
+mockRequire('../../webhookHandlers/intake/move-to-iaa-go/create-checklists-on-intake-card', addIntakeChecklist);
 mockRequire('../../webhookHandlers/intake/move-to-iaa-go/create-atc-card', createATCCard);
 mockRequire('../../webhookHandlers/intake/move-to-iaa-go/create-bpa-components', createBPAComponents);
 
