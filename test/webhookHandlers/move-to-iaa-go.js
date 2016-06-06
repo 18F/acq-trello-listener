@@ -9,7 +9,7 @@ process.env.TRELLO_API_KEY = 'trello-api-key';
 process.env.TRELLO_API_TOK = 'trello-api-tok';
 
 const sandbox = sinon.sandbox.create();
-const addIntakeChecklist = sandbox.stub().resolves();
+const addIntakeChecklist = sandbox.stub();
 const createATCCard = sandbox.stub();
 const createBPAComponents = sandbox.stub();
 
@@ -98,9 +98,9 @@ tap.test('webhook handlers - intake: move to IAA Go', t1 => {
         }
       };
 
-      t3.test('createATCCard rejects', t4 => {
+      t3.test('addIntakeChecklist rejects', t4 => {
         const err = new Error('Test error');
-        createATCCard.rejects(err);
+        addIntakeChecklist.rejects(err);
 
         moveToiaaGo(trelloEvent)
           .then(() => {
@@ -113,11 +113,11 @@ tap.test('webhook handlers - intake: move to IAA Go', t1 => {
           .then(t4.done);
       });
 
-      t3.test('createATCCard resolves', t4 => {
-        t4.test('createBPAComponents rejects', t5 => {
+      t3.test('addIntakeChecklist resolves', t4 => {
+        t4.test('createATCCard rejects', t5 => {
           const err = new Error('Test error');
-          createATCCard.resolves();
-          createBPAComponents.rejects(err);
+          addIntakeChecklist.resolves();
+          createATCCard.rejects(err);
 
           moveToiaaGo(trelloEvent)
             .then(() => {
@@ -130,18 +130,40 @@ tap.test('webhook handlers - intake: move to IAA Go', t1 => {
             .then(t5.done);
         });
 
-        t4.test('createBPAComponents resolves', t5 => {
-          createATCCard.resolves();
-          createBPAComponents.resolves();
+        t4.test('createATCCard resolves', t5 => {
+          t5.test('createBPAComponents rejects', t6 => {
+            const err = new Error('Test error');
+            addIntakeChecklist.resolves();
+            createATCCard.resolves();
+            createBPAComponents.rejects(err);
 
-          moveToiaaGo(trelloEvent)
-            .then(() => {
-              t5.pass('resolves');
-            })
-            .catch(() => {
-              t5.fail('resolves');
-            })
-            .then(t5.done);
+            moveToiaaGo(trelloEvent)
+              .then(() => {
+                t6.fail('rejects');
+              })
+              .catch(e => {
+                t6.pass('rejects');
+                t6.equal(e, err, 'returns the expected error');
+              })
+              .then(t6.done);
+          });
+
+          t5.test('createBPAComponents resolves', t6 => {
+            addIntakeChecklist.resolves();
+            createATCCard.resolves();
+            createBPAComponents.resolves();
+
+            moveToiaaGo(trelloEvent)
+              .then(() => {
+                t6.pass('resolves');
+              })
+              .catch(() => {
+                t6.fail('resolves');
+              })
+              .then(t6.done);
+          });
+
+          t5.done();
         });
 
         t4.done();
