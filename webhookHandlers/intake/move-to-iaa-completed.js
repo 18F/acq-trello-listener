@@ -8,7 +8,7 @@ const log = require('../../logger')('intake handler: IAA Completed');
 const bpaStartsWith = 'Agile BPA';
 const iaaCompleteStartsWith = 'IAA Completed Work Begin';
 
-const bpaURLRegex = /(^|\n)### Agile BPA Links\n\n.*\n\* \[BPA Dashboard\]\((http.*?)\)(\n|$)/;
+const bpaURLRegex = /(^|\n)### Agile BPA Links\n.*\n\* \[BPA Dashboard\]\((http.*?)\)(\n|$)/;
 const bpaCardIDRegex = /https:\/\/trello\.com\/c\/([^\/]+)\/.+/;
 
 module.exports = function handleIntakeWebhookEvent(e) {
