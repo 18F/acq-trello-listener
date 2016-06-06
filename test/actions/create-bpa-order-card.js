@@ -7,6 +7,9 @@ const trello = require('node-trello');
 process.env.TRELLO_API_KEY = 'trello-api-key';
 process.env.TRELLO_API_TOK = 'trello-api-tok';
 
+const sandbox = sinon.sandbox.create();
+const trelloPost = sandbox.stub(trello.prototype, 'post');
+
 const createBPAOrderCard = require('../../actions/create-bpa-order-card');
 
 // Disable logging to the console.
@@ -18,9 +21,6 @@ const subagency = 'subagency-name';
 const boardURL = 'https://some.board.url/asdf';
 
 tap.test('actions - create BPA order card', t1 => {
-  const sandbox = sinon.sandbox.create();
-  const trelloPost = sandbox.stub(trello.prototype, 'post');
-
   t1.beforeEach(done => {
     sandbox.reset();
     done();

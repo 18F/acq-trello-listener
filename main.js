@@ -27,7 +27,18 @@ httpServer.listen(process.env.PORT, () => {
     });
 });
 
-trello.get(`/1/boards/${process.env.TRELLO_BPA_BOARD_ID}/lists`, (err, lists) => {
-  const list = lists.sort((a, b) => a.pos - b.pos).filter(a => a.name.startsWith('IAA'))[0];
-  process.env.TRELLO_BPA_IAA_LIST_ID = list.id;
-});
+trello.get(`/1/boards/${process.env.TRELLO_BPA_BOARD_ID}/lists`)
+  .then(lists => {
+    const sortedLists = lists.sort((a, b) => a.pos - b.pos);
+    const iaaList = sortedLists.filter(a => a.name.startsWith('IAA'))[0];
+    const workshopPrepList = sortedLists.filter(a => a.name.startsWith('Workshop Prep'))[0];
+    process.env.TRELLO_BPA_IAA_LIST_ID = iaaList.id;
+    process.env.TRELLO_BPA_WORKSHOP_PREP_LIST_ID = workshopPrepList.id;
+  });
+
+trello.get(`/1/boards/${process.env.TRELLO_ATC_BOARD_ID}/lists`)
+  .then(lists => {
+    const sortedLists = lists.sort((a, b) => a.pos - b.pos);
+    const preflightList = sortedLists.filter(a => a.name.startsWith('Preflight'))[0];
+    process.env.TRELLO_ATC_PREFLIGHT_LIST_ID = preflightList.id;
+  });
