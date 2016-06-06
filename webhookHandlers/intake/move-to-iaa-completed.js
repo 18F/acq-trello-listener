@@ -12,6 +12,11 @@ const bpaURLRegex = /(^|\n)### Agile BPA Links\n.*\n\* \[BPA Dashboard\]\((http.
 const bpaCardIDRegex = /https:\/\/trello\.com\/c\/([^\/]+)\/.+/;
 
 module.exports = function handleIntakeWebhookEvent(e) {
+  if(!process.env.TRELLO_BPA_WORKSHOP_PREP_LIST_ID) {
+    log.warn('BPA Workshop Prep list ID not ready');
+    return Promise.reject(new Error('BPA Workshop Prep list ID not ready'));
+  }
+
   if(eventTypes(e) !== eventTypes.CardMoved) {
     log.verbose('Not a card move');
     return Promise.reject(new Error('Not a card move'));
