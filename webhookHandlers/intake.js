@@ -1,6 +1,7 @@
 'use strict';
 
 const iaaGo = require('./intake/move-to-iaa-go')
+const iaaCompleted = require('./intake/move-to-iaa-completed')
 
 module.exports = function executeIntakeHandlers(e) {
   // Wraps functions in a 0-argument shell and captures
@@ -8,10 +9,10 @@ module.exports = function executeIntakeHandlers(e) {
   // wrapped functions can be passed directly into
   // then/catch.
   const func = fn => (() => fn(e));
-  
-  const iaaCompleted = func(require('./intake/move-to-iaa-completed'));
+
+  const iaaCompletedPromise = func(iaaCompleted);
 
   return iaaGo(e)
-    .then(iaaCompleted, iaaCompleted)
+    .then(iaaCompletedPromise, iaaCompletedPromise)
     .catch(() => null);
 }
