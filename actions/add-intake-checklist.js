@@ -8,10 +8,10 @@ module.exports = function addIntakeChecklist(cardID) {
   let checklistID;
   return trello.get(`/1/cards/${cardID}/checklists`)
   .then(checklists => {
-    if(checklists.filter(list => list.name === checklistName).length) {
+    if (checklists.some(list => list.name === checklistName)) {
       throw new Error('Intake card already has an intake forms checklist');
     }
-    
+
     return trello.post('/1/checklists', {
       idCard: cardID,
       name: checklistName
@@ -22,9 +22,5 @@ module.exports = function addIntakeChecklist(cardID) {
       name: '7600 SOW'
     });
   })
-  .then(() => {
-    return trello.post(`/1/checklists/${checklistID}/checkItems`, {
-      name: 'Budget Estimate'
-    });
-  });
+  .then(() => trello.post(`/1/checklists/${checklistID}/checkItems`, { name: 'Budget Estimate' }));
 };
