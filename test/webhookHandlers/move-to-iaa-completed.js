@@ -91,7 +91,7 @@ tap.test('webhook handlers - intake: move to IAA Completed', listIDTest => {
           test.pass('rejects');
           test.equal(trelloGet.callCount, 0, 'does not call trello get');
           test.equal(trelloPut.callCount, 0, 'does not call trello put');
-          test.equal(e.message, 'Not an Agile  BPA card, or not a move into IAA Completed Work Begin', 'returns the expected error');
+          test.equal(e.message, 'Not a move into IAA Completed Work Begin', 'returns the expected error');
         })
         .then(test.done);
     });
@@ -122,7 +122,7 @@ tap.test('webhook handlers - intake: move to IAA Completed', listIDTest => {
           test.pass('rejects');
           test.equal(trelloGet.callCount, 0, 'does not call trello get');
           test.equal(trelloPut.callCount, 0, 'does not call trello put');
-          test.equal(e.message, 'Not an Agile  BPA card, or not a move into IAA Completed Work Begin', 'returns the expected error');
+          test.equal(e.message, 'Not an Agile  BPA card', 'returns the expected error');
         })
         .then(test.done);
     });

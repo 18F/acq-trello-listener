@@ -22,9 +22,14 @@ module.exports = function handleIntakeWebhookEvent(e) {
     return Promise.reject(new Error('Not a card move'));
   }
 
-  if (!e.action.data.card.name.startsWith(bpaStartsWith) || !e.action.data.listAfter.name.startsWith(iaaCompleteStartsWith)) {
-    log.verbose(`Not an Agile BPA card, or not a move into ${iaaCompleteStartsWith}`);
-    return Promise.reject(new Error(`Not an Agile  BPA card, or not a move into ${iaaCompleteStartsWith}`));
+  if(!e.action.data.listAfter.name.startsWith(iaaCompleteStartsWith)) {
+    log.verbose(`Not a move into ${iaaCompleteStartsWith}`);
+    return Promise.reject(new Error(`Not a move into ${iaaCompleteStartsWith}`));
+  }
+
+  if (!e.action.data.card.name.startsWith(bpaStartsWith)) {
+    log.verbose(`Not an Agile BPA card`);
+    return Promise.reject(new Error(`Not an Agile  BPA card`));
   }
 
   return trello.get(`/1/cards/${e.action.data.card.id}`) //, (err, card) => {
