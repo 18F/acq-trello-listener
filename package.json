@@ -1,11 +1,41 @@
 {
   "name": "acq-trello-listener",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AcqStack Trello listener server",
   "main": "main.js",
   "keywords": [
     ""
   ],
   "author": "Greg Walker <michael.walker@gsa.gov>",
-  "license": "CC0-1.0"
+  "license": "CC0-1.0",
+  "scripts": {
+    "start": "node main.js",
+    "cf-ups-dev": "node -e 'console.log(\"'\"'\"'\" + JSON.stringify(require(\"./.cf-ups.json\").dev) + \"'\"'\"'\")'",
+    "cf-ups-prod": "node -e 'console.log(\"'\"'\"'\" + JSON.stringify(require(\"./.cf-ups.json\").prod) + \"'\"'\"'\")'",
+    "lint": "eslint --fix **/*.js",
+    "test": "tap -Rspec --cov test/coverage.js 'test/**/*.js'"
+  },
+  "dependencies": {
+    "@18f/trello-webhook-server": "^3.1.0",
+    "@erdc-itl/simple-logger": "^1.1.0",
+    "cfenv": "^1.0.3",
+    "dotenv": "^2.0.0",
+    "moment": "^2.13.0",
+    "node-trello": "^1.1.2"
+  },
+  "engines": {
+    "node": "^6.1.0",
+    "npm": "^3.8.6"
+  },
+  "devDependencies": {
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.0.1",
+    "mock-require": "^1.3.0",
+    "sinon": "^1.17.4",
+    "sinon-as-promised": "^4.0.0",
+    "tap": "^5.7.1"
+  }
 }
