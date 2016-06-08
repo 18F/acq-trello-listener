@@ -1,6 +1,6 @@
 {
   "name": "acq-trello-listener",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AcqStack Trello listener server",
   "main": "main.js",
   "keywords": [
